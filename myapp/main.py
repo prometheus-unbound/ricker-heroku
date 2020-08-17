@@ -17,7 +17,7 @@ at your command prompt. Then navigate to the URL
 
 in your browser.
 
-Evan Delaney (evde) @ Equinor - 19 August 2020
+Evan Delaney (evde) @ Equinor - 17 August 2020
 
 '''
 
@@ -27,7 +27,7 @@ import numpy as np
 from bokeh.io import curdoc
 from bokeh.layouts import row, column
 from bokeh.models import ColumnDataSource
-from bokeh.models.widgets import Slider, TextInput
+from bokeh.models.widgets import Slider, TextInput, Paragraph, Div
 from bokeh.plotting import figure
 from bokeh.models import Range1d
 
@@ -269,9 +269,13 @@ inputs = column(fpeak_widget, scalar_widget, signalLength_widget, sampleRate_wid
 #spectrum_column = column(plot2, data_table)
 #layout = row(main_row, spectrum_column)
 
+div = Div(text="""<a href="https://github.com/prometheus-unbound/ricker-heroku">source code</a>""",
+width=200, height=100)
+
+input_column = column(inputs,div)
 wavelet_column =  column(plot1, data_table1)
 spectrum_column = column(plot2, data_table2)
-layout = row(inputs, wavelet_column, spectrum_column)
+layout = row(input_column, wavelet_column, spectrum_column)
 
 curdoc().add_root(layout)
 curdoc().title = "Ricker Gone Wild"	
